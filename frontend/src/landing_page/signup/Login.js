@@ -10,12 +10,13 @@ const Login = () => {
     email: "",
     password: "",
   });
-  
+
   const { email, password } = inputValue;
 
   // Handle input changes
   const handleOnChange = (e) => {
     const { name, value } = e.target;
+    console.log(`Updating ${name} to ${value}`); // Debugging log
     setInputValue((prevState) => ({
       ...prevState,
       [name]: value,
@@ -40,19 +41,18 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      console.log("Submitting form with:", { email, password }); // Debugging log
       const { data } = await axios.post(
         "http://localhost:4000/api/auth/login", // Ensure this endpoint is correct
         { email, password }, // Send only email and password
         { withCredentials: true }
       );
-
       console.log(data);
       const { success, message } = data;
-
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          navigate("/"); // Redirect after success
+          window.open("http://localhost:3001", "_self"); // Redirect after success
         }, 1000);
       } else {
         handleError(message);
@@ -60,13 +60,12 @@ const Login = () => {
     } catch (error) {
       console.error("Login error:", error);
       handleError(error.response?.data?.message || "An error occurred. Please try again.");
-    } finally {
-      // Reset input fields after submission
-      setInputValue({
-        email: "",
-        password: "",
-      });
     }
+    // Remove this to prevent clearing input values
+    // setInputValue({
+    //   email: "",
+    //   password: "",
+    // });
   };
 
   return (

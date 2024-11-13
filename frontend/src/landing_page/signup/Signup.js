@@ -176,8 +176,6 @@ const Signup = () => {
             position: "bottom-right",
         });
     };
-
-    // Handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
@@ -186,14 +184,13 @@ const Signup = () => {
                 inputValue,
                 { withCredentials: true }
             );
-
+            console.log(data)
             const { success, message } = data;
             if (success) {
+                window.open("http://localhost:3001", "_self"); 
                 handleSuccess(message);
-                // Redirect to the dashboard running on a different port (3001)
-                setTimeout(() => {
-                    window.location.href = "http://localhost:3001"; // Open the dashboard app
-                }, 1000);
+                
+               
             } else {
                 handleError(message);
             }
@@ -201,16 +198,7 @@ const Signup = () => {
             console.error("Signup error:", error);
             handleError(error.response?.data?.message || "An error occurred. Please try again.");
         }
-
-        // Reset form fields
-        setInputValue({
-            name: "",
-            email: "",
-            password: "",
-            username: "",
-        });
-    };
-
+    }
     return (
         <div className="signup-container">
             <img
