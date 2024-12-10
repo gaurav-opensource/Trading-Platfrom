@@ -5,10 +5,10 @@ import { VerticalGraph } from "./VerticalGraph";
 // import { holdings } from "../data/data";
 
 const Holdings = () => {
-  const [allHoldings, setAllHoldings] = useState([]);
+  const [allHoldings, setAllHoldings] = useState([]); 
 
   useEffect(() => {
-    axios.get("http://localhost:3002/allHoldings").then((res) => {
+    axios.get("http://localhost:4000/allHoldings").then((res) => {
       console.log(res.data);
       setAllHoldings(res.data);
     });
@@ -72,7 +72,7 @@ const Holdings = () => {
                 <td>{stock.name}</td>
                 <td>{stock.qty}</td>
                 <td>{stock.avg.toFixed(2)}</td>
-                <td>{stock.price.toFixed(2)}</td>
+                <td>{stock.price.toFixed(2)}</td>  
                 <td>{curValue.toFixed(2)}</td>
                 <td className={profClass}>
                   {(curValue - stock.avg * stock.qty).toFixed(2)}
@@ -109,3 +109,4 @@ const Holdings = () => {
 };
 
 export default Holdings;
+

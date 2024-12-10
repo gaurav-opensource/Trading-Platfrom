@@ -1,6 +1,7 @@
 import React from "react";
 
-import { positions } from "../data/data";
+import { positions } from "../data/data.js";
+
 
 const Positions = () => {
   return (
@@ -41,6 +42,7 @@ const Positions = () => {
           })}
         </table>
       </div>
+     
     </>
   );
 };

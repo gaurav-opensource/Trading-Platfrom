@@ -7,12 +7,15 @@ function Navbar() {
       style={{ backgroundColor: "#FFF" }}
     >
       <div class="container p-2">
+        
         < Link class="navbar-brand" to="/">
-          <img
-            src="media/images/logo.svg"
-            style={{ width: "25%" }}
-            alt="Logo"
-          />
+          {
+            
+           <img
+            src="media/images/logo1.png"
+            style={{ width: "50%" }}
+            alt="Logo" /> }
+            
         </Link >
         <button
           class="navbar-toggler"

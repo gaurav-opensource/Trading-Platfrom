@@ -79,6 +79,8 @@ app.get("/addPositions", async (req, res) => {
   res.send("Done!");
 });
 
+
+
 app.get("/allHoldings", async (req, res) => {
   let allHoldings = await HoldingsModel.find({});
   res.json(allHoldings);
