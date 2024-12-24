@@ -21,16 +21,12 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-   "start": "cross-env PORT=3001 react-scripts start",
+    "start": "cross-env PORT=3001 react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
-<<<<<<< HEAD
   "proxy": "https://trading-platfrom.onrender.com",
-=======
-   "proxy": "https://trading-platfrom.onrender.com",
->>>>>>> aab89648fe477f3eb5dcafff3840f0af41b5e5b0
   "eslintConfig": {
     "extends": [
       "react-app",
