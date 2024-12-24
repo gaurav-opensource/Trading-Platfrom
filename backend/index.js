@@ -6,8 +6,8 @@ const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const cookieParser = require("cookie-parser");
-const authRoutes = require('./Routes/AuthRoute');
-const authRoute = require("./Routes/AuthRoute"); // Auth routes
+
+const userRoutes = require("./Routes/AuthRoute"); // Auth routes
 const { HoldingsModel } = require("./model/HoldingsModel"); // Holdings model
 const { PositionsModel } = require("./model/PositionsModel"); // Positions model
 const { OrdersModel } = require("./model/OrdersModel"); // Orders model
@@ -35,7 +35,7 @@ app.use(cookieParser());
 app.use(bodyParser.json()); // Parse JSON bodies
 
 // Routes
-app.use('/api/auth', authRoutes);
+app.use("/api/users", userRoutes);
 
 // Positions routes
 app.get("/addPositions", async (req, res) => {
