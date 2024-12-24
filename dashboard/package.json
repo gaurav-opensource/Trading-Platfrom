@@ -26,7 +26,11 @@
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
+<<<<<<< HEAD
   "proxy": "https://trading-platfrom.onrender.com",
+=======
+   "proxy": "https://trading-platfrom.onrender.com",
+>>>>>>> aab89648fe477f3eb5dcafff3840f0af41b5e5b0
   "eslintConfig": {
     "extends": [
       "react-app",
