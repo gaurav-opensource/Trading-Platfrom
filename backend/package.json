@@ -2,18 +2,13 @@
   "name": "backend",
   "version": "1.0.0",
   "main": "index.js",
-<<<<<<< HEAD
+
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js"
-},
-=======
- "scripts": {
-    "start": "node index.js",
+    "start": "nodemon index.js",
     "dev": "nodemon index.js"
 },
 
->>>>>>> aab89648fe477f3eb5dcafff3840f0af41b5e5b0
+
   "author": "",
   "license": "ISC",
   "devDependencies": {

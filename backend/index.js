@@ -26,16 +26,12 @@ mongoose
   .catch((err) => console.error(err));
 
 // Middleware
-app.use(cors({
-  origin: ["http://localhost:3000"], // Adjust the origin to your frontend URL
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  credentials: true,
-}));
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
 app.use(cookieParser());
 app.use(bodyParser.json()); // Parse JSON bodies
 
 // Routes
-app.use("/api/users", userRoutes);
+app.use("/api", userRoutes);
 
 // Positions routes
 app.get("/addPositions", async (req, res) => {
