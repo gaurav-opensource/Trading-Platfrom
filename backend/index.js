@@ -26,7 +26,11 @@ mongoose
   .catch((err) => console.error(err));
 
 // Middleware
-app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+
+app.use(cors({
+  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  credentials: true
+}));
 
 app.use(cookieParser());
 app.use(bodyParser.json()); // Parse JSON bodies

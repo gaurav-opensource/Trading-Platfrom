@@ -34,16 +34,17 @@ const Signup = () => {
     try {
       console.log("Request Sent:", formData); // Log the data being sent
       const { data } = await axios.post(
-        `http://localhost:4000/api/register`, // Ensure this matches the correct URL
+        `${process.env.REACT_APP_API_URL}/api/register`, // Dynamically use the URL
         formData,
         { withCredentials: true }
       );
+      
       console.log("Response from backend:", data); // Log the response from the backend
 
       const { success, message } = data;
       if (success) {
         showToast(message, "success");
-        window.location.href = "http://localhost:3000"; // Use this for redirection
+        window.location.href = "https://trading-platfrom-dashborad.onrender.com"; // Use this for redirection
       } else {
         showToast(message, "error");
       }
