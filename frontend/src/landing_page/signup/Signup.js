@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import server from "../environment";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -34,10 +35,11 @@ const Signup = () => {
     try {
       console.log("Request Sent:", formData); // Log the data being sent
       const { data } = await axios.post(
-        `${process.env.REACT_APP_API_URL}/api/register`, // Dynamically use the URL
+        `${server.prod}/api/register`, // Correct way to include the server URL
         formData,
         { withCredentials: true }
       );
+      
       
       console.log("Response from backend:", data); // Log the response from the backend
 
