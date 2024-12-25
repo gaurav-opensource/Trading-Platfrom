@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
 import axios from "axios";
+import server from "../environment";
 
 import GeneralContext from "./GeneralContext";
 
@@ -12,7 +13,7 @@ const BuyActionWindow = ({ uid }) => {
   const [stockPrice, setStockPrice] = useState(0.0);
 
   const handleBuyClick = () => {
-    axios.post(`${process.env.REACT_APP_API_URL}/newOrder`, {
+    axios.post(`${server.prodL}/newOrder`, {
       name: uid,
       qty: stockQuantity,
       price: stockPrice,
