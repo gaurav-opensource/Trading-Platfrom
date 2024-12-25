@@ -43,7 +43,7 @@ const Signup = () => {
       const { success, message } = data;
       if (success) {
         showToast(message, "success");
-        window.location.href = "http://localhost:3001"; // Use this for redirection
+        window.location.href = "http://localhost:3000"; // Use this for redirection
       } else {
         showToast(message, "error");
       }
