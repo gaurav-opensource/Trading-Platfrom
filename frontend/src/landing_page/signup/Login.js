@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css'; // Import toast styles
 
 const Login = () => {
-  const navigate = useNavigate();
+
   const [inputValue, setInputValue] = useState({
-    email: "",
+    phone: "", // Change 'email' to 'phone'
     password: "",
   });
 
-  const { email, password } = inputValue;
+  const { phone, password } = inputValue;
 
   // Handle input changes
   const handleOnChange = (e) => {
@@ -41,31 +41,37 @@ const Login = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Submitting form with:", { email, password }); // Debugging log
+      console.log("Submitting form with:", { phone, password }); // Debugging log
+
+      // Ensure phone number is not empty
+      if (!phone || !password) {
+        handleError("Phone number and password are required!");
+        return;
+      }
+
       const { data } = await axios.post(
-        "http://localhost:4000/api/auth/login", // Ensure this endpoint is correct
-        { email, password }, // Send only email and password
+        "http://localhost:4000/api/login", // Update to your hosted URL
+        { phone, password },
         { withCredentials: true }
       );
+
       console.log(data);
       const { success, message } = data;
       if (success) {
         handleSuccess(message);
         setTimeout(() => {
-          window.open("http://localhost:3001", "_self"); // Redirect after success
+          window.open("https://trading-platfrom-dashborad.onrender.com/", "_self"); // Redirect after success to dashboard
         }, 1000);
       } else {
         handleError(message);
       }
     } catch (error) {
       console.error("Login error:", error);
-      handleError(error.response?.data?.message || "An error occurred. Please try again.");
+
+      // Handling network or unexpected error
+      const errorMessage = error.response?.data?.message || "An error occurred. Please try again.";
+      handleError(errorMessage);
     }
-    // Remove this to prevent clearing input values
-    // setInputValue({
-    //   email: "",
-    //   password: "",
-    // });
   };
 
   return (
@@ -73,14 +79,14 @@ const Login = () => {
       <h2>Login to Your Account</h2>
       <form onSubmit={handleSubmit}>
         <div>
-          <label htmlFor="email">Email</label>
+          <label htmlFor="phone">Phone</label> {/* Updated label */}
           <input
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Enter your email"
+            type="tel" // Changed to 'tel' to allow flexible phone number formats
+            name="phone" // Updated name to 'phone'
+            value={phone}
+            placeholder="Enter your phone number"
             onChange={handleOnChange}
-            required // Make field required
+            required
           />
         </div>
         <div>
@@ -91,7 +97,7 @@ const Login = () => {
             value={password}
             placeholder="Enter your password"
             onChange={handleOnChange}
-            required // Make field required
+            required
           />
         </div>
         <button type="submit">Login</button>

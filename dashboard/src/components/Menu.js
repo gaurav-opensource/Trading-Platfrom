@@ -125,7 +125,7 @@ const Menu = () => {
       if (!token) return; // If no token, user is a guest
 
       try {
-        const response = await axios.get("http://localhost:4000/api/auth/me", {
+        const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/auth/me`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setUser(response.data);
@@ -147,7 +147,7 @@ const Menu = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
-    window.location.href = "http://localhost:3000/login";
+    window.location.href = `${process.env.REACT_APP_API_URL}/login`;
   };
 
   const menuClass = "menu";

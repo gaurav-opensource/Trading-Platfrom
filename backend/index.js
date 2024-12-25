@@ -28,7 +28,7 @@ mongoose
 // Middleware
 
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://localhost:3001'],
+  origin: ['https://trading-platfrom-12.onrender.com', 'https://trading-platfrom-dashborad.onrender.com'],
   credentials: true
 }));
 

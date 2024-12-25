@@ -1,20 +1,18 @@
-
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import server from "../environment";
 
-const Signup = () => {
+const Login = () => {
   const [formData, setFormData] = useState({
-    username: "",
-    email: "",
     phone: "",
     password: "",
   });
 
-  const { username, email, phone, password } = formData;
+  const { phone, password } = formData;
+  const navigate = useNavigate(); // For redirection after successful login
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -33,64 +31,43 @@ const Signup = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      console.log("Request Sent:", formData); // Log the data being sent
+      console.log("Login Request Sent:", formData); // Log the data being sent
       const { data } = await axios.post(
-        `${server.prod}/api/register`, // Correct way to include the server URL
+        `http://localhost:4000/api/login`, // Correct way to include the server URL
         formData,
         { withCredentials: true }
       );
-      
-      
+
       console.log("Response from backend:", data); // Log the response from the backend
 
       const { success, message } = data;
       if (success) {
         showToast(message, "success");
-        window.location.href = "https://trading-platfrom-dashborad.onrender.com"; // Use this for redirection
+        setTimeout(() => {
+          navigate("/dashboard"); // Redirect to dashboard after successful login
+        }, 1000);
       } else {
         showToast(message, "error");
       }
     } catch (error) {
-      console.error("Signup error:", error);
+      console.error("Login error:", error);
       showToast(error.response?.data?.message || "An error occurred. Please try again.", "error");
     }
   };
 
   return (
-    <div className="signup-container">
+    <div className="login-container">
       <img
         src="media/images/homeHero.png"
         alt="Zerodha Hero"
         className="hero-image"
       />
-      <h1 className="form-title">Signup to Zerodha</h1>
-      <form onSubmit={handleSubmit} className="signup-form">
-        <div className="form-group">
-          <label htmlFor="username">Name</label>
-          <input
-            type="text"
-            name="username"
-            value={username}
-            placeholder="Enter your name"
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="email">Email</label>
-          <input
-            type="email"
-            name="email"
-            value={email}
-            placeholder="Enter your email"
-            onChange={handleChange}
-            required
-          />
-        </div>
+      <h1 className="form-title">Login to Zerodha</h1>
+      <form onSubmit={handleSubmit} className="login-form">
         <div className="form-group">
           <label htmlFor="phone">Phone</label>
           <input
-            type="text"
+            type="tel"
             name="phone"
             value={phone}
             placeholder="Enter your phone number"
@@ -109,14 +86,14 @@ const Signup = () => {
             required
           />
         </div>
-        <button type="submit" className="btn-submit">Signup</button>
-        <span className="login-link">
-          Already have an account? <Link to="/login">Login</Link>
+        <button type="submit" className="btn-submit">Login</button>
+        <span className="signup-link">
+          Don't have an account? <Link to="/signup">Signup</Link>
         </span>
       </form>
       <ToastContainer />
-    </div>//adddd
+    </div>
   );
 };
 
-export default Signup;
+export default Login;
